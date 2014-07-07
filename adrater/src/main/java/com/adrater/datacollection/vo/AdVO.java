@@ -1,13 +1,8 @@
 package com.adrater.datacollection.vo;
 
-import java.util.Map;
-import java.util.Set;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.solr.client.solrj.beans.Field;
-
-import com.mongodb.DBObject;
 
 @XmlRootElement
 public class AdVO  {

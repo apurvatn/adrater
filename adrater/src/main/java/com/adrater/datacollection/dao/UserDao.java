@@ -2,12 +2,14 @@ package com.adrater.datacollection.dao;
 
 import java.net.UnknownHostException;
 
+import com.adrater.datacollection.vo.UserVO;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException.DuplicateKey;
+import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
 
 /**
@@ -34,11 +36,12 @@ public class UserDao {
 
 	}
 
-	public Integer validateUser(String userVO) {
+	public Integer validateUser(UserVO userVO) {
 		
-		BasicDBObject dbObj = (BasicDBObject) JSON.parse(userVO);
+		BasicDBObject query = new BasicDBObject("email", userVO.getEmail()).append("pwd", userVO.getPwd());
 		DBCollection userCollection = db.getCollection(USER_COLLECTION_NAME);
-		DBCursor dbCursor = userCollection.find(dbObj);
+		DBCursor dbCursor = userCollection.find(query);
+		System.out.println(dbCursor.count());
 		if(dbCursor.count()!=0){
 			return dbCursor.count();
 		}
@@ -66,7 +69,9 @@ public class UserDao {
 			BasicDBObject dbObj = (BasicDBObject) JSON.parse(userVo);
 			DBCollection userCollection = db
 					.getCollection(USER_COLLECTION_NAME);
-			userCollection.insert(dbObj);
+			WriteResult testinsertion= userCollection.insert(dbObj);
+			System.out.println("get N"+testinsertion.getN());
+			System.out.println("get tostring"+testinsertion.toString());
 		} catch (DuplicateKey e) {
 			System.out.println("A user with this email id already exists");
 			e.printStackTrace();

@@ -3,6 +3,7 @@ package com.adrater.manager;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -15,35 +16,61 @@ import com.adrater.datacollection.vo.UserVO;
  * @author apurvatn
  *
  */
-public class UserManager {
+public class UserManager_old {
 	
 	private ObjectMapper mapper = new ObjectMapper();
 
-	public void addUser(String userVO){
+	public int addUser(UserVO userVO){
+
+		String userVOStr;
+		
+		userVO.setFname("John");
+		userVO.setLname("Doe");
+		userVO.setEmail("johndoe@example.com");
+		userVO.setPwd("pass123");
 		
 		try {
+			userVOStr = mapper.writeValueAsString(userVO);
 			UserDao userDao = new UserDao();
-			userDao.addUser(userVO);
+			userDao.addUser(userVOStr);
+			
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return 0;
 	}
 	
-	public boolean validateUser(String email){
+	public boolean validateUser(UserVO userVO){
 		
+		String userVOStr;
 		try {
+			userVOStr = mapper.writeValueAsString(userVO);
 			UserDao userDao = new UserDao();
-			UserVO userVO = mapper.readValue(email, UserVO.class);
 			int result = userDao.validateUser(userVO);
 			if(result!=0){
 				System.out.println("User found");
 				return true;
 			}
+			
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println("User not found");
 		return false;
 	}

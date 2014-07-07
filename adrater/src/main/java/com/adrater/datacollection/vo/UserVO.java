@@ -4,8 +4,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class UserVO {
 	
+	@JsonIgnore
 	private String fname;
+	
+	@JsonIgnore
 	private String lname;
+	
 	private String email;
 	private String pwd;
 	
