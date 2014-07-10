@@ -91,6 +91,43 @@ public class AdDao {
 		return adList;
 	}
 	
+	/**
+	 * This methods returns a few ads. The number of ads returned depends on the "count".
+	 * The ads that are returned depends on the "startIndex". Starting from the "startIndex", "count" number
+	 * of ads are returned to the calling function.
+	 * @param startIndex
+	 * @param count
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
+	public  List<AdVO> getAds(int startIndex, int count) throws JsonParseException, JsonMappingException, IOException{
+		
+		DBCollection adCollection = db.getCollection(AD_COLLECTION_NAME);
+		
+		//set the fields  that are required
+		BasicDBObject fields = new BasicDBObject().append("_id",false).append("id", true).append("adHeader", true).append("adLink", true)
+				.append("subCategory", true);
+		
+		
+		DBCursor cursor = adCollection.find(null,fields).skip(startIndex).limit(count);
+					
+		ObjectMapper mapper = new ObjectMapper();
+		//list of all the ads
+		List<AdVO> adList = new LinkedList<>();
+		AdVO adVo=null;
+		
+		while(cursor.hasNext()){
+			 adVo = mapper.readValue(cursor.next().toString(), AdVO.class);
+			 adList.add(adVo);
+						
+		}
+		return adList;
+		
+	}
+	
+	
 	private void createCollections(){
 		
 		db.createCollection("ad", new BasicDBObject());
