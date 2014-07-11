@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ad listings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	href="bootstrap/css/bootstrap.min.css">
+</head>
+<body onload="listAds(0)">
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/adlist.js"></script>
+	
+
+	<div class="col-md-12">
+		<h1>Hello, world!</h1>
+			
+		<div class="col-md-10">
+			<ul class="pager">
+				<li><a id="a_prev" href="#"> << Previous</a></li>
+				<li><a id="a_next" href="#">Next >> </a></li>
+			</ul>
+		</div>
+
+		<div class="col-md-10">
+			<div class="panel panel-info">
+				<div class="panel-heading"></div>
+				<div class="panel-body">
+					<table class="table" id="tbl_ads">
+						<tbody>
+							<tr>
+								<td>Data 1</td>
+								<td>Data 2</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>
