@@ -2,15 +2,18 @@ package com.adrater.services;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.adrater.datacollection.vo.AdVO;
 import com.adrater.manager.AdManager;
+import com.sun.jersey.api.view.Viewable;
 
 /**
  * This class provides the REST service for ads 
@@ -31,12 +34,27 @@ public class AdService {
 	}*/
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<AdVO> getAds(@DefaultValue("0") @QueryParam("part") int part){
-		
+	@Produces(MediaType.TEXT_HTML)
+	public Viewable getAds(@Context HttpServletRequest httpRequest){
+		if(httpRequest.getParameter("id") != null){
+			//get the view containing the ad details
+			AdManager adManager = new AdManager();
+			AdVO adVO = adManager.getAdDetails(httpRequest.getParameter("id"));
+			System.out.println(adVO);
+			httpRequest.setAttribute("adVO", adVO);
+			return new Viewable("/ad.jsp");
+		}
+		//get the part of the result that is being requested
+		int part = 0;
+		if(httpRequest.getParameter("part") != null) part = (int)Long.parseLong(httpRequest.getParameter("part"));
+			
 		AdManager adManger = new AdManager();
-		return adManger.getAds(part);
-		
+		List<AdVO> adList =  adManger.getAds(part);
+		httpRequest.setAttribute("adlist", adList);
+		httpRequest.setAttribute("part", part);
+			
+		return new Viewable("/ads.jsp");
 	}
-
+	
+	
 }
