@@ -19,8 +19,8 @@ import com.mongodb.util.JSON;
  */
 public class UserDao {
 
-	private static final String HOST = "localhost";// "localhost";
-	private static final int PORT = 27017;// 27017;
+	private static final String HOST = "ds033018.mongolab.com";// "localhost";
+	private static final int PORT = 33018;// 27017;
 	private static final String DB_NAME = "craigslist";
 	private static final String USER_COLLECTION_NAME = "user";
 	private static final String USERNAME = "cmpe295b";
