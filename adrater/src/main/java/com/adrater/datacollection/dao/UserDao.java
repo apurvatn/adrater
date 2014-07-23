@@ -7,7 +7,9 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoURI;
 import com.mongodb.MongoException.DuplicateKey;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
@@ -19,8 +21,8 @@ import com.mongodb.util.JSON;
  */
 public class UserDao {
 
-	private static final String HOST = "localhost";// "localhost";
-	private static final int PORT = 27017;// 27017;
+	private static final String HOST = "ds033018.mongolab.com";// "localhost";
+	private static final int PORT = 33018;// 27017;
 	private static final String DB_NAME = "craigslist";
 	private static final String USER_COLLECTION_NAME = "user";
 	private static final String USERNAME = "cmpe295b";
@@ -32,7 +34,26 @@ public class UserDao {
 
 		MongoClient client = new MongoClient(HOST, PORT);
 		db = client.getDB(DB_NAME);
-		// db.authenticateCommand(USERNAME, PASSWORD.toCharArray());
+		db.authenticateCommand(USERNAME, PASSWORD.toCharArray());
+		
+//		String username = "cmpe295b";
+//    	char[] password = {'c','m','p','e','2','9','5','b'};
+//    	
+//    	//connect to the Mongolab
+//    	String textUri = "mongodb://cmpe295b:cmpe295b@ds033018.mongolab.com:33018/craigslist";
+//    	MongoURI uri  = new MongoURI(textUri); 
+//    	Mongo m = new Mongo(uri);
+//        // connect to your database
+//        DB db = m.getDB( "craigslist" );
+//		System.out.println("Connected to database successfully");
+//		//authentication
+//		boolean auth = db.authenticate(username,password);            			 
+//    	System.out.println("Authentication: "+auth);
+//    	
+//    	DBCollection coll = db.getCollection("user");
+//    	System.out.println("Collection selected successfully");
+		
+		
 
 	}
 

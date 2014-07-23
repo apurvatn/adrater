@@ -14,7 +14,7 @@ public class SignUpService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void signUp(String userVO)
 	{
-		System.out.println("Inside sinup");
+		System.out.println("Inside sinup "+userVO);
 		try {
 			UserManager userManager = new UserManager();
 			userManager.addUser(userVO);
