@@ -54,6 +54,9 @@ public class AdManager {
 	
 	public List<AdVO> getAds( int part ){
 		
+		if(part < 0 ) part = 0;
+		else if(part > Integer.MAX_VALUE)  part = Integer.MAX_VALUE - 1;
+		
 		int startIndex = adLimit * part;
 		
 		List<AdVO> adList = null;
@@ -70,14 +73,18 @@ public class AdManager {
 		
 	}
 	
-	public static void main(String[] args) {
+	public AdVO getAdDetails(String adId){
+				
+		try {
+			AdDao adDao = new AdDao();
+			return adDao.getAd(adId);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 		
-		AdManager manager = new AdManager();
-		List<AdVO> adList =  manager.getAds(2);
-		
-		for(AdVO adVO : adList)
-			System.out.println(adVO);
 		
 	}
-	
+		
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -20,6 +21,7 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.adrater.datacollection.dao.AdDao;
 import com.adrater.datacollection.vo.AdVO;
 
 public class Indexer {
@@ -65,6 +67,19 @@ public class Indexer {
 		
 	}
 	
+	private void extractFromMongo() throws IOException, SolrServerException{
+		
+		AdDao adDao = new AdDao();
+		List<AdVO> adLists = adDao.getAllAds();
+		
+		for(AdVO adVO: adLists){
+			
+			server.addBean(adVO);
+			System.out.println("Adding  "+ adVO);
+		}
+		
+		server.commit();
+	}
 	
 	private void addDocuments(){
 		//add the ad details for indexing
@@ -78,7 +93,7 @@ public class Indexer {
 			
 				try {
 					AdVO adVo = mapper.readValue(adInfoFile, AdVO.class);
-					System.out.println(adVo);
+					
 					server.addBean(adVo);
 					
 				} catch (IOException e) {
@@ -139,8 +154,14 @@ public class Indexer {
 		
 		Indexer indexer = new Indexer();
 	//	indexer.addDocuments();
-		indexer.deleteAllDocs();
+	//	indexer.deleteAllDocs();
 	//	indexer.getAllDocs();
+		try {
+			indexer.extractFromMongo();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

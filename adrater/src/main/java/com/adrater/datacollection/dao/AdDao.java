@@ -146,6 +146,42 @@ public class AdDao {
 		
 	}
 	
+	/**
+	 * For the given ad id, this method returns the details of the ad to the
+	 * calling function
+	 * @param adId
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
+	public AdVO getAd( String adId) throws JsonParseException, JsonMappingException, IOException{
+		
+		DBCollection adCollection = db.getCollection(AD_COLLECTION_NAME);
+		//set the required fields that need to be fetched
+		BasicDBObject fields = new BasicDBObject().append("_id", false).append("id", true).append("adHeader", true).append("addLink", true)
+				.append("subCategory", true).append("location", true).append("postDate", true).append("adDetails", true);
+		
+		//query to find the required doc
+		BasicDBObject query = new BasicDBObject("id", "4492497102");
+		
+		//search for the document 
+		DBCursor result = adCollection.find(query, fields);
+		
+		//map the result into a VO object
+		ObjectMapper mapper = new ObjectMapper();
+		//assuming the id is unique, we just return one ad
+		AdVO adVO = null;
+		if(result.hasNext()){
+	//		System.out.println(result.next().toString());
+			adVO = mapper.readValue(result.next().toString(), AdVO.class);
+			
+		}
+		return adVO;
+		
+	}
+	
+	
 	
 	private void createCollections(){
 		
@@ -174,11 +210,5 @@ public class AdDao {
 						
 		}
 	}
-	
-	public static void main(String[] args) throws UnknownHostException {
-		AdDao dao = new AdDao();
-	//	dao.getAllCollections();
-		dao.deleteAllItems();
-	}
-	
+		
 }
