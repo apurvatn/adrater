@@ -26,36 +26,23 @@ public class AdService {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<AdVO> getAllAds(){
+	public List<AdVO> getAllAds( @DefaultValue("0") @QueryParam("part") String part ){
 		
 		AdManager adManager = new AdManager();
-		List<AdVO> adList = adManager.getAllAds();
+		List<AdVO> adList = adManager.getAds((int)Long.parseLong(part));
 		return adList;
 	}
 	
-	/*@GET
-	@Produces(MediaType.TEXT_HTML)
-	public Viewable getAds(@Context HttpServletRequest httpRequest){
-		if(httpRequest.getParameter("id") != null){
-			//get the view containing the ad details
-			AdManager adManager = new AdManager();
-			AdVO adVO = adManager.getAdDetails(httpRequest.getParameter("id"));
-			System.out.println(adVO);
-			
-			httpRequest.setAttribute("adVO", adVO);
-			return new Viewable("/ad.jsp");
-		}
-		//get the part of the result that is being requested
-		int part = 0;
-		if(httpRequest.getParameter("part") != null) part = (int)Long.parseLong(httpRequest.getParameter("part"));
-			
-		AdManager adManger = new AdManager();
-		List<AdVO> adList =  adManger.getAds(part);
-		httpRequest.setAttribute("adlist", adList);
-		httpRequest.setAttribute("part", part);
-			
-		return new Viewable("/ads.jsp");
+	@GET
+	@Path("ad")
+	@Produces(MediaType.APPLICATION_JSON)
+	public AdVO getAd (@QueryParam("id") String id){
+		if(id == null || id == "")
+			return null;
+		
+		AdManager adManager = new AdManager();
+		return adManager.getAdDetails(id);
+ 
 	}
-	*/
 	
 }
