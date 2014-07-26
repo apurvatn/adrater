@@ -4,7 +4,12 @@
 
 var count = 0;
 
+
+
 $(document).ready(function() {
+	alert("Please wait while we load latest posts");
+	listAds(count);
+	
 	$("#a_prev").click(function() {
 		if (count == 0) {
 			// do nothing
@@ -32,13 +37,26 @@ $(document).ready(function() {
 		listAds(count);
 
 	});
+	
+	$("#col-lg-12 text-center").ready(function() {
+//		var category = $('#category').val();
+//		var subcategory = $('#subcategory').val();
+//		var location = $('#location').val();
+//		var ratings = $('#ratings').val();
+//		var distance = $('#distance').val();
+//		alert(category + subcategory + location + ratings + distance);
+//		count++;
+		listAds(count);
+
+	});
+	
+	
 
 });
 
 function listAds(count) {
 
 	$.ajax({
-
 		url : "adrater/ads?part="+count,
 		type : "GET",
 		contentType : "application/json",
@@ -49,12 +67,12 @@ function listAds(count) {
 			if (data != 0) {
 
 				// delete all rows in the table
-				$("#tbl_ads tbody>tr").remove();
+				//$("#tbl_ads tbody>tr").remove();
 
 				$.each(data, function(index, element) {
 
 					$("#tbl_ads > tbody:last").append(
-							'<tr><td>' + element.adHeader + '</td></tr>');
+							'<tr><td align= "left"><a href="adrater/ads?id='+element.id+'" >' +  element.postDate + '</a></td><td align= "left"><a href="adrater/ads?id='+element.location+'" >' +  element.adHeader + '</a></td><td align= "left"><a href="adrater/ads?id='+element.id+'" >' +  element.location.info + '</a></td><td align= "left"><a href="adrater/ads?id='+element.id+'" >' +  element.subCategory.category + '</a></td></tr>');
 				});
 
 			} else {

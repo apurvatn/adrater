@@ -24,16 +24,16 @@ import com.sun.jersey.api.view.Viewable;
 @Path("/ads")
 public class AdService {
 	
-	/*@GET
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<AdVO> getAllAds(){
 		
 		AdManager adManager = new AdManager();
 		List<AdVO> adList = adManager.getAllAds();
 		return adList;
-	}*/
+	}
 	
-	@GET
+	/*@GET
 	@Produces(MediaType.TEXT_HTML)
 	public Viewable getAds(@Context HttpServletRequest httpRequest){
 		if(httpRequest.getParameter("id") != null){
@@ -41,6 +41,7 @@ public class AdService {
 			AdManager adManager = new AdManager();
 			AdVO adVO = adManager.getAdDetails(httpRequest.getParameter("id"));
 			System.out.println(adVO);
+			
 			httpRequest.setAttribute("adVO", adVO);
 			return new Viewable("/ad.jsp");
 		}
@@ -55,6 +56,6 @@ public class AdService {
 			
 		return new Viewable("/ads.jsp");
 	}
-	
+	*/
 	
 }
