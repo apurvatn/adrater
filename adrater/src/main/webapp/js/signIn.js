@@ -11,7 +11,8 @@ alert(formToJSON());
 				if(data != 0){
 					alert("you are logged in");
 					 //$.cookie('cust_id',data,{expires:1,path:'/'});
-					window.location.href = "ads.html";
+					//window.location.href = "ads.html";
+					window.location.href = "home.html";
 				} else {
 					alert("Please sign up");
 				}

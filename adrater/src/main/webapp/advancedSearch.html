@@ -38,6 +38,7 @@
 
 <body>
 <p align= "right"><a href= ""><small>Sign Out</small></a></p>
+
 	<div class="brand">Dimensional Rating</div>
 	<div class="address-bar">San Francisco Bay Area</div>
 
@@ -91,9 +92,85 @@
 				<div class="col-lg-12 text-center">
 				<div>
 				<form name="" action="">
-							<input type="text"></input>
-							<button type="submit">Search</button>
-							<a href="advancedSearch.html">Advanced Search Options</a>
+							<table>
+							<tr>
+								<td>Category</td>
+								<td><select class="form-control" id="category">
+										<option id="" value="Community">-----</option>
+										<option id="" value="Community">Community</option>
+										<option id="" value="Personal">Personals</option>
+										<option id="" value="Discussion">Discussion
+											Forums</option>
+										<option id="" value="Housing">Housing</option>
+										<option id="" value="For Sale">For Sale</option>
+										<option id="" value="Services">Services</option>
+										<option id="" value="Jobs">Jobs</option>
+										<option id="" value="Gigs">Gigs</option>
+										<option id="" value="Resumes">Resumes</option>
+								</select></td>
+								<td>Sub Category</td>
+								<td><select class="form-control" id="subcategory">
+								<option id="" value="Community">-----</option>
+										<option id="" value="beauty services">beauty</option>
+										<option id="creative services" value="creative services">creative</option>
+										<option id="computer services" value="computer services">computer</option>
+										<option id="cycle services" value="cycle services">cycle</option>
+										<option id="event services" value="event services">event</option>
+										<option id="financial services" value="financial services">financial</option>
+										<option id="automotive services" value="legal services">legal</option>
+										<option id="automotive services" value="lessons services">lessons</option>
+										<option id="automotive services" value="marine services">marine</option>
+										<option id="automotive services" value="pet services">pet</option>
+										<option id="automotive services" value="automotive services">automotive</option>
+										<option id="automotive services" value="famr/garden services">farm+garden</option>
+										<option id="household services" value="household services">household</option>
+										<option id="automotive services" value="labor/move services">labor/move</option>
+										<option id="automotive services"value="skilled trade services">skilled trade</option>
+										<option id="automotive services" value="real estate services">real estate</option>
+										<option id="automotive services" value="sm biz ads services">sm biz ads</option>
+										<option id="automotive services" value="therapeutic services">therapeutic</option>
+										<option id="automotive services" value="travle/vac services">travel/vac</option>
+										<option id="automotive services" value="write/edit/tr8 services">write/edit/tr8</option>
+								</select></td>
+
+								<td>Location</td>
+								<td><select class="form-control" id="location">
+								<option id="" value="Community">-----</option>
+										<option value="San Francisco">San Francisco</option>
+										<option value= "South Bay">South Bay</option>
+										<option value="East Bay">East Bay</option>
+										<option value="Peninsula">Peninsula</option>
+										<option value="North Bay">North Bay</option>
+										<option value="Santa Cruz">Santa Cruz</option>
+								</select></td>
+								<td>Ratings</td>
+								<td><select class="form-control" id="ratings">
+								<option id="" value="Community">-----</option>
+										<option>1 stars and above</option>
+										<option>2 stars and above</option>
+										<option>3 stars and above</option>
+										<option>4 stars and above</option>
+										<option>5 stars and above</option>
+								</select></td>
+								<td>Distance</td>
+								<td><select class="form-control" id="distance">
+								<option id="" value="Community">-----</option>
+										<option>5 miles</option>
+										<option>10 miles</option>
+										<option>20 miles</option>
+										<option>50 miles</option>
+										<option>100 miles</option>
+								</select></td>
+								<tr>
+								<td colspan=5 align="justify">
+									<button class="btn btn-large btn-primary" type="submit" id="search"
+										onClick="">Search</button>
+								</td>
+								</tr>
+							</tr>
+
+
+						</table>
 						</form>
 				</div>
 				<hr>
@@ -112,17 +189,15 @@
 					<table class="table" id="tbl_ads" border=0>
 						<tbody>
 						
-						<tr>
-								<th align= "left">Post Date<th>
-								<th align= "left">Post</th>
-								<th align= "left">Location</th>
-								<th align= "left">Category</th>
-							</tr>
+						<th>
+								<td align= "left">Post Date<td>
+								<td align= "left">Post</td>
+								<td align= "left">Location</td>
+								<td align= "left">Category</td>
+							</th>
 							<tr>
 								<td>Data 1</td>
 								<td>Data 2</td>
-								
-								
 							</tr>
 
 						</tbody>
