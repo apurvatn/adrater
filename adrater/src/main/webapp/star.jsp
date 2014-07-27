@@ -125,8 +125,7 @@
 								<td rowspan=3 width=30%><img src="../bootstrap/img/apurva.jpg"></td>
 								
 								<td align="topleft">Title:<%out.print(adVo.getAdHeader()); %><br>
-								Post:<%out.print(adVo.getAdDetails()); %> <br>
-								Category: <%out.print(adVo.getSubCategory().getCategory()); %> <br>
+								Post:<%out.print(adVo.getAdDetails()); %> 
 					Post Date: <%out.print(adVo.getPostDate()); %> <br>
 					Location: <%out.print(adVo.getLocation()); %> <br>
 								</td>

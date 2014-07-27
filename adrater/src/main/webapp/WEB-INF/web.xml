@@ -21,4 +21,5 @@
   <servlet-mapping>
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/adrater/*</url-pattern>
-  </servlet-mapping></web-app>
+  </servlet-mapping>
+  </web-app>

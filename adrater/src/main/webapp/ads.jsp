@@ -1,4 +1,5 @@
 <%@page import="com.adrater.datacollection.vo.AdVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -120,7 +121,7 @@
 			
 					<table class="table" id="tbl_ads">
 						<tbody>
-<<<<<<< HEAD
+
 							<%
 								List<AdVO> adList = (List<AdVO>)request.getAttribute("adlist");
 								for(AdVO adVo : adList){
@@ -129,16 +130,15 @@
 									
 									<td><a id=<%out.print(adVo.getId());%> href="ads?id=<%out.print(adVo.getId());%>"><% out.print(adVo.getPostDate()); %></td>	
 									<td><a id=<%out.print(adVo.getId());%> href="ads?id=<%out.print(adVo.getId());%>"><% out.print(adVo.getAdHeader()); %></td>
-									<td><a id=<%out.print(adVo.getId());%> href="ads?id=<%out.print(adVo.getId());%>"><% out.print(adVo.getSubCategory().getCategory()); %></td>
 									<td><a id=<%out.print(adVo.getId());%> href="ads?id=<%out.print(adVo.getId());%>"><% out.print(adVo.getLocation()); %></td>
 									</tr><% 
 									
 								}
 							
 							%>
-=======
+
 							<!-- java code removed -->
->>>>>>> 0994ee513de8a8b0d2ffbc41e2f318ce8804da7c
+
 						</tbody>
 					</table>
 		</div>

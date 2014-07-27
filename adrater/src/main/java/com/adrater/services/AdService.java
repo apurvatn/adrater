@@ -24,15 +24,15 @@ import com.sun.jersey.api.view.Viewable;
 @Path("/ads")
 public class AdService {
 
-/*	@GET
+/*@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<AdVO> getAllAds(){
 
 		AdManager adManager = new AdManager();
 		List<AdVO> adList = adManager.getAllAds();
 		return adList;
-	}*/
-
+	}
+*/
 	@GET
 
 	@Produces(MediaType.TEXT_HTML)

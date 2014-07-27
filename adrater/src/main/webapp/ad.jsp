@@ -110,9 +110,7 @@
 									out.print(adVo.getAdHeader());
 								%><br> Post:<%
 									out.print(adVo.getAdDetails());
-								%> <br> Category: <%
- 	out.print(adVo.getSubCategory().getCategory());
- %> <br> Post Date: <%
+								%> Post Date: <%
  	out.print(adVo.getPostDate());
  %> <br> Location: <%
  	out.print(adVo.getLocation());

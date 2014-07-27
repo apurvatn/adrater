@@ -214,9 +214,7 @@ System.out.println("Collection selected successfully");
 						
 		}
 	}
-<<<<<<< HEAD
-			
-=======
+
 	
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		
@@ -257,6 +255,5 @@ System.out.println("Collection selected successfully");
 			System.out.println(mapper.writeValueAsString(adVo));
 		}
 	}
-		
->>>>>>> 0994ee513de8a8b0d2ffbc41e2f318ce8804da7c
+
 }
