@@ -51,8 +51,8 @@ public class AdIndexer {
 		inputDocument.addField("url", adVO.getAdLink());
 		inputDocument.addField("adDetails_txt", adVO.getAdDetails());
 		inputDocument.addField("postDate_dt", toSolrDateFormat(adVO.getPostDate()));
-		inputDocument.addField("category_s", adVO.getSubCategory().getCategory());
-		inputDocument.addField("area_txt", adVO.getLocation().getInfo());
+		inputDocument.addField("category_s", adVO.getSubCategory());
+		inputDocument.addField("area_txt", adVO.getLocationInfo());
 		
 		 try {
 			server.add(inputDocument);
@@ -83,8 +83,8 @@ public class AdIndexer {
 			inpDoc.addField("url", adVO.getAdLink());
 			inpDoc.addField("adDetails_txt", adVO.getAdDetails());
 			inpDoc.addField("postDate_dt", toSolrDateFormat(adVO.getPostDate()));
-			inpDoc.addField("category_s", adVO.getSubCategory().getCategory());
-			inpDoc.addField("area_txt", adVO.getLocation().getInfo());
+			inpDoc.addField("category_s", adVO.getSubCategory());
+			inpDoc.addField("area_txt", adVO.getLocationInfo());
 			
 			documentList.add(inpDoc);
 		}

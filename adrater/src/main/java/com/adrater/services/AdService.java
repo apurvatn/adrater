@@ -37,6 +37,7 @@ public class AdService {
 	@Path("ad")
 	@Produces(MediaType.APPLICATION_JSON)
 	public AdVO getAd (@QueryParam("id") String id){
+		System.out.println(id);
 		if(id == null || id == "")
 			return null;
 		
