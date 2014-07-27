@@ -3,6 +3,8 @@ package com.adrater.datacollection;
 import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -243,9 +245,18 @@ public class LinkGetter {
 		
 		// get the posting time
 		Elements postDateElems = doc.getElementsByTag("time");
+		SimpleDateFormat outFormat = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ssZ");
+		
+		
 		if(postDateElems.size() > 0){
 			Element postDate = postDateElems.get(postDateElems.size()-1);
-			adVo.setPostDate(postDate.attr("datetime"));
+			try {
+				adVo.setPostDate(outFormat.parse(postDate.attr("datetime")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 

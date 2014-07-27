@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -29,6 +33,26 @@ public class Indexer {
 	private static final String HOST = "http://localhost:8983/solr/";
 	
 	private HttpSolrServer server;
+	
+	private static final Map<FIELDS, String> SOLR_FIELD_MAP = new HashMap<FIELDS, String>();
+	
+	public static enum FIELDS {
+		ID,
+		AD_HEADER,		
+		AD_DETAIL,
+		POST_DATE,
+		CATEGORY
+	}
+	
+	static {
+		
+		SOLR_FIELD_MAP.put(FIELDS.ID, "id");
+		SOLR_FIELD_MAP.put(FIELDS.AD_HEADER, "adHeader_t");
+		SOLR_FIELD_MAP.put(FIELDS.AD_DETAIL, "adDetails_t");
+		SOLR_FIELD_MAP.put(FIELDS.POST_DATE, "postDate_dt");
+		SOLR_FIELD_MAP.put(FIELDS.CATEGORY, "category");
+		
+	}
 	
 	public Indexer() {
 			
@@ -93,7 +117,7 @@ public class Indexer {
 			if(adInfoFile.isDirectory()) continue;
 				try {
 					AdVO adVo = mapper.readValue(adInfoFile, AdVO.class);
-					adVo.setPostDate(adVo.getPostDate()+"Z");
+			//		adVo.setPostDate(adVo.getPostDate()+"Z");
 					System.out.println(adVo);
 					server.addBean(adVo);
 					
@@ -140,11 +164,45 @@ public class Indexer {
 		*/
 	}
 	
-	public void findDocument(){
+	public void findDocument(Map<FIELDS, String> queryMap){
 		
-		SolrQuery query = new SolrQuery();
+ 		SolrQuery query = new SolrQuery();
+		query.setQuery( SOLR_FIELD_MAP.get(FIELDS.AD_DETAIL) + ":" +queryMap.get(FIELDS.AD_DETAIL));
+	
+		
+		String [] fields = null;
+		String [] filter = new String [queryMap.size()];
+		
+		//construct the filter
+		int index = 0;
+		for(Entry<FIELDS, String> entry : queryMap.entrySet()){
+			
+			if(entry.getKey().equals(FIELDS.AD_DETAIL)) continue;
+			filter[index] = SOLR_FIELD_MAP.get(entry.getKey()) + ":" + entry.getValue();
+			
+			index++;
+		}
+		
+		//get the fields that needs to be returned as part of the result set
+		fields = SOLR_FIELD_MAP.values().toArray((new String[SOLR_FIELD_MAP.size()]));
+				
+		query.setFilterQueries(filter);
+		query.setFields(fields);
+		
+		QueryResponse response = null;
+		try {
+			response = server.query(query);
+		} catch (SolrServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	//	SolrDocumentList  docList = response.getResults();
+		List<AdVO> adList = response.getBeans(AdVO.class);
 		
 		
+		for(int i = 0 ; i< adList.size(); i++){
+			System.out.println(adList.get(i));
+		}
 		
 	}
 	
@@ -154,9 +212,9 @@ public class Indexer {
 	public static void main(String[] args) throws SolrServerException {
 		
 		Indexer indexer = new Indexer();
-	
-		indexer.deleteAllDocs();
-		indexer.addDocuments();
+		
+	//	indexer.deleteAllDocs();
+	//	indexer.addDocuments();
 	//	indexer.getAllDocs();
 		/*try {
 			indexer.extractFromMongo();
@@ -164,6 +222,14 @@ public class Indexer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		
+		//querying for some document
+		Map<FIELDS, String> query = new HashMap<Indexer.FIELDS, String>();
+		query.put(FIELDS.AD_DETAIL, "plumber");
+		query.put(FIELDS.CATEGORY, "household services");
+		
+		indexer.findDocument(query);
+		
 	}
 
 }
