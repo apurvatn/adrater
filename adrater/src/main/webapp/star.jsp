@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<%@page import="com.adrater.datacollection.vo.AdVO"%>
+<html>
 <head>
+<link href="../bootstrap/css/star-rating.css" media="all" rel="stylesheet"
+	type="text/css" />
+<link href="../bootstrap/css/star-rating.min.css" media="all"
+	rel="stylesheet" type="text/css" />
 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,14 +17,14 @@
 <title>Dimensional Rating</title>
 
 <!-- Bootstrap Core CSS -->
-<!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-<link href="bootstrap/css/star.css" rel="stylesheet">
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="bootstrap/css/star.css" rel="stylesheet"> NOT NEEDED...CONFLICTING-->
 
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 
 <!-- Custom CSS -->
-<link href="bootstrap/css/business-casual.css" rel="stylesheet">
+<link href="../bootstrap/css/business-casual.css" rel="stylesheet">
 
 <!-- Fonts -->
 <link
@@ -38,11 +40,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-</head>
-
-<body>
-	<p align="right">
+<!--  from ad.jsp-->
+    <meta charset="UTF-8"/>
+    <title>Krajee JQuery Plugins - &copy; Kartik</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="../bootstrap/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="../js/star-rating.js" type="text/javascript"></script>
+<body><p align="right">
 		<a href=""><small>Sign Out</small></a>
 	</p>
 	<div class="brand">Dimensional Rating</div>
@@ -109,11 +114,21 @@
 					
 
 					<div class="col-lg-12 text-center" id="col-lg-12 text-center">
+					
+					<%
+				//get the ad details
+				AdVO adVo = (AdVO)request.getAttribute("adVO");
+			
+			%>
 						<table border=0 width=100%>
 							<tr>
-								<td rowspan=3 width=30%><img src="bootstrap/img/apurva.jpg"></td>
-								<td align="topleft">Free bed bug treament in San Jose<br>San
-									Francisco<br>Posted Date:
+								<td rowspan=3 width=30%><img src="../bootstrap/img/apurva.jpg"></td>
+								
+								<td align="topleft">Title:<%out.print(adVo.getAdHeader()); %><br>
+								Post:<%out.print(adVo.getAdDetails()); %> <br>
+								Category: <%out.print(adVo.getSubCategory().getCategory()); %> <br>
+					Post Date: <%out.print(adVo.getPostDate()); %> <br>
+					Location: <%out.print(adVo.getLocation()); %> <br>
 								</td>
 							</tr>
 							<!-- <tr>
@@ -230,8 +245,7 @@
 
 			</div>
 			<hr>
-
-
+<!-- End of page before rate -->
 			<div id="welcomeDiv" class="row-md-10" style="display: none;">
 
 				<table border=0 width=100%>
@@ -327,7 +341,8 @@
 
 
 			</div>
-			<!-- </div> -->
+			<!--end of rate div  -->	
+						<!-- </div> -->
 
 			<!--    <div id="carousel-example-generic" class="carousel slide">
                         Indicators
@@ -428,14 +443,14 @@
 
 
 	<!-- Bootstrap Core JavaScript -->
-	<!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
-	<script src="js/adlist.js"></script>
-	<script src="js/star.js"></script>
-	<script src="js/showdiv.js"></script>
-	<script src="js/star-rating.js" type="text/javascript"></script>
-<!-- 	<script src="js/star-rating.min.js" type="text/javascript"></script>-->
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
- -->
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../js/adlist.js"></script>
+	<script src="../js/star.js"></script>
+	<script src="../js/showdiv.js"></script>
+	<script src="../js/star-rating.js" type="text/javascript"></script>
+	<script src="../js/star-rating.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+
 
 	<!-- Script to Activate the Carousel -->
 	<script>		
@@ -456,6 +471,42 @@
 			$(".rating-kv").rating();
 		});
 	</script>
-</body>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+<form>
+    <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+    <br>
+    <div class="clearfix"></div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-default">Reset</button>
+    </div>
+</form>
+<br>
+<script>
+    jQuery(document).ready(function () {
+        $(".rating-kv").rating();
+    });
+</script>
+
+</div>  -->  
+</body>
 </html>

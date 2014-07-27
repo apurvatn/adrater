@@ -4,12 +4,10 @@
 
 var count = 0;
 
-
-
 $(document).ready(function() {
 	alert("Please wait while we load latest posts");
-	listAds(count);
-	
+	listAds(0);
+
 	$("#a_prev").click(function() {
 		if (count == 0) {
 			// do nothing
@@ -26,69 +24,113 @@ $(document).ready(function() {
 
 	});
 
-	$("#search").click(function() {
-		var category = $('#category').val();
-		var subcategory = $('#subcategory').val();
-		var location = $('#location').val();
-		var ratings = $('#ratings').val();
-		var distance = $('#distance').val();
-		alert(category + subcategory + location + ratings + distance);
-		count++;
-		listAds(count);
-
+	$("#submit").click(function() {
+		adDetails(id);
 	});
-	
-	$("#col-lg-12 text-center").ready(function() {
-//		var category = $('#category').val();
-//		var subcategory = $('#subcategory').val();
-//		var location = $('#location').val();
-//		var ratings = $('#ratings').val();
-//		var distance = $('#distance').val();
-//		alert(category + subcategory + location + ratings + distance);
-//		count++;
-		listAds(count);
-
-	});
-	
-	
 
 });
 
 function listAds(count) {
 
 	$.ajax({
-		url : "adrater/ads?part="+count,
-		type : "GET",
-		contentType : "application/json",
+				url : "adrater/ads?part=" + count,
+				type : "GET",
+				contentType : "application/json",
 
-		// function to be called when success
-		success : function(data, textStatus, jqXHR) {
+				// function to be called when success
+				success : function(data, textStatus, jqXHR) {
 
-			if (data != 0) {
+					if (data != 0) {
 
-				// delete all rows in the table
-				//$("#tbl_ads tbody>tr").remove();
+						// delete all rows in the table
+						// $("#tbl_ads tbody>tr").remove();
 
-				$.each(data, function(index, element) {
+						$
+								.each(
+										data,
+										function(index, element) {
 
-					$("#tbl_ads > tbody:last").append(
-							'<tr><td align= "left"><a href="adrater/ads?id='+element.id+'" >' +  element.postDate + '</a></td><td align= "left"><a href="adrater/ads?id='+element.location+'" >' +  element.adHeader + '</a></td><td align= "left"><a href="adrater/ads?id='+element.id+'" >' +  element.location.info + '</a></td><td align= "left"><a href="adrater/ads?id='+element.id+'" >' +  element.subCategory.category + '</a></td></tr>');
-				});
+											$("#tbl_ads > tbody:last")
+													.append(
+															'<tr><td align= "left"><a href="javascript:adDetails('
+																	+ element.id
+																	+ ')" >'
+																	+ element.postDate
+																	+ '</a></td><td align= "left"><a href="adDetails.html">'
+																	+ element.adHeader
+																	+ '</a></td><td align= "left"><a href="adrater/ads/ad?'
+																	+ element.id
+																	+ '" >'
+																	+ element.location
+																	+ '</a></td><td align= "left"><a href="adrater/ads/ad?id='
+																	+ element.id
+																	+ '" >'
+																	+ element.subCategory.category
+																	+ '</a></td></tr>');
+										});
 
-			} else {
+					} else {
 
-				alert("no data available" + " " + textStatus);
-			}
+						alert("no data available" + " " + textStatus);
+					}
 
-		},
+				},
 
-		// function to be called in case of error
-		error : function(textStatus, jqXHR, errorThrown) {
+				// function to be called in case of error
+				error : function(textStatus, jqXHR, errorThrown) {
 
-			alert(textStatus + " " + jqXHR);
+					alert(textStatus + " " + jqXHR);
 
-		}
+				}
 
-	});
+			});
+
+}
+
+function adDetails(id) {
+	alert("in function adDetails");
+	//window.open('adDetails.html');
+	$.ajax({
+				url : "adrater/ads/ad?id=" + id,
+				type : "GET",
+				contentType : "application/json",
+
+				// function to be called when success
+				success : function(data, textStatus, jqXHR) {
+
+					if (data != 0) {
+
+						//delete all rows in the table
+						$(".container").remove();
+
+						$
+								.each(
+										data,
+										function(index, element) {
+
+											$("adDetails#tbl_ads > tbody:last")
+													.append(
+															'<tr><td align= "left"><a href="javascript:adDetails('
+																	+ element.id
+																	+ ')" >'
+																	+ element.postDate
+																	+ '</a></td></tr>');
+										});
+
+					} else {
+
+						alert("no data available" + " " + textStatus);
+					}
+
+				},
+
+				// function to be called in case of error
+				error : function(textStatus, jqXHR, errorThrown) {
+
+					alert(textStatus + " " + jqXHR);
+
+				}
+
+			});
 
 }
