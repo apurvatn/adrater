@@ -89,7 +89,7 @@ public class AdDao {
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException 
 	 */
-	public List<AdVOOld> getAllAds() throws JsonParseException, JsonMappingException, IOException{
+	public List<AdVO> getAllAds() throws JsonParseException, JsonMappingException, IOException{
 		
 		DBCollection adCollection = db.getCollection(AD_COLLECTION_NAME);
 		
@@ -102,13 +102,13 @@ public class AdDao {
 					
 		ObjectMapper mapper = new ObjectMapper();
 		//list of all the ads
-		List<AdVOOld> adList = new LinkedList<>();
-		AdVOOld adVo=null;
+		List<AdVO> adList = new LinkedList<>();
+		AdVO adVo=null;
 		
 		while(cursor.hasNext()){
 			String data = cursor.next().toString();
 						
-			 adVo = mapper.readValue(data, AdVOOld.class);
+			 adVo = mapper.readValue(data, AdVO.class);
 			 adList.add(adVo);
 						
 		}
