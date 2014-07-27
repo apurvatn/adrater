@@ -18,14 +18,16 @@ public class AdVO  {
 	@Field("adDetails_txt")
 	private String adDetails;
 	
-	@Field("postDate_s")
+	@Field("postDate_dt")
 	private String postDate;
 	
-	
-	private CategoryVO subCategory;
-	
-	
+	@Field("category")
+	private String subCategory;
+		
 	private LocationVO location;
+	
+	@Field("locationInfo_txt")
+	private String locationInfo;
 	
 	public AdVO(){
 		
@@ -35,11 +37,11 @@ public class AdVO  {
 		this.adHeader = adHeader;
 		this.adLink = adLink;
 	}
-	@Override
+	/*@Override
 	public String toString(){
 		
-		return "{id:"+ this.id+ ", header:"+this.adHeader+" , link:"+this.adLink+" , details:"+this.adDetails+" , time:"+this.postDate+ " , category:"+ this.subCategory+" , location:"+this.location+"}";
-	}
+		return "{id:"+ this.id+ ", header:\""+this.adHeader+"\" , link:\""+this.adLink+"\" , details:\""+this.adDetails+"\" , time:\""+this.postDate+ "\" , category:\""+ this.subCategory+"\", locationInfo:\""+this.locationInfo+ "\", location:"+this.location+"}";
+	}*/
 	
 	
 	public String getId() {
@@ -63,10 +65,10 @@ public class AdVO  {
 	public void setAdLink(String adLink) {
 		this.adLink = adLink;
 	}
-	public CategoryVO getSubCategory() {
+	public String getSubCategory() {
 		return subCategory;
 	}
-	public void setSubCategory(CategoryVO subCategory) {
+	public void setSubCategory(String subCategory) {
 		this.subCategory = subCategory;
 	}
 
@@ -92,6 +94,14 @@ public class AdVO  {
 
 	public void setLocation(LocationVO location) {
 		this.location = location;
+	}
+
+	public String getLocationInfo() {
+		return locationInfo;
+	}
+
+	public void setLocationInfo(String locationInfo) {
+		this.locationInfo = locationInfo;
 	}
 		
 
