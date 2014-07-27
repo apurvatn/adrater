@@ -23,26 +23,38 @@ import com.sun.jersey.api.view.Viewable;
  */
 @Path("/ads")
 public class AdService {
-	
-	@GET
+
+/*	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<AdVO> getAllAds( @DefaultValue("0") @QueryParam("part") String part ){
-		
+	public List<AdVO> getAllAds(){
+
 		AdManager adManager = new AdManager();
-		List<AdVO> adList = adManager.getAds((int)Long.parseLong(part));
+		List<AdVO> adList = adManager.getAllAds();
 		return adList;
-	}
-	
+	}*/
+
 	@GET
-	@Path("ad")
-	@Produces(MediaType.APPLICATION_JSON)
-	public AdVO getAd (@QueryParam("id") String id){
-		if(id == null || id == "")
-			return null;
-		
-		AdManager adManager = new AdManager();
-		return adManager.getAdDetails(id);
- 
+	@Produces(MediaType.TEXT_HTML)
+	public Viewable getAds(@Context HttpServletRequest httpRequest){
+		if(httpRequest.getParameter("id") != null){
+			AdManager adManager = new AdManager();
+			AdVO adVO = adManager.getAdDetails(httpRequest.getParameter("id"));
+			System.out.println(adVO);
+			
+			httpRequest.setAttribute("adVO", adVO);
+			//////
+			return new Viewable("/star.jsp");
+		}
+		int part = 0;
+		if(httpRequest.getParameter("part") != null) part = (int)Long.parseLong(httpRequest.getParameter("part"));
+			
+		AdManager adManger = new AdManager();
+		List<AdVO> adList =  adManger.getAds(part);
+		httpRequest.setAttribute("adlist", adList);
+		httpRequest.setAttribute("part", part);
+			/////////////////////////////
+		return new Viewable("/ads.jsp");
 	}
 	
+
 }

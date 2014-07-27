@@ -39,24 +39,23 @@ public class AdDao {
 	
 	
 	public AdDao() throws UnknownHostException{
-//		String username = "cmpe295b";
-//    	char[] password = {'c','m','p','e','2','9','5','b'};
+/*String username = "cmpe295b";
+    	char[] password = {'c','m','p','e','2','9','5','b'};
+    	
+    	//connect to the Mongolab
+    	String textUri = "mongodb://cmpe295b:cmpe295b@ds033018.mongolab.com:33018/craigslist";
+    	MongoURI uri  = new MongoURI(textUri); 
+    	Mongo m = new Mongo(uri);
+        // connect to your database
+        DB db = m.getDB( "craigslist" );
+		System.out.println("Connected to database successfully");
+		//authentication
+		boolean auth = db.authenticate(username,password);            			 
+System.out.println("Authentication: "+auth);
+//   DBCollection coll = db.getCollection("user");
+System.out.println("Collection selected successfully");
 //    	
-//    	//connect to the Mongolab
-//    	String textUri = "mongodb://cmpe295b:cmpe295b@ds033018.mongolab.com:33018/craigslist";
-//    	MongoURI uri  = new MongoURI(textUri); 
-//    	Mongo m = new Mongo(uri);
-//        // connect to your database
-//        DB db = m.getDB( "craigslist" );
-//		System.out.println("Connected to database successfully");
-//		//authentication
-//		boolean auth = db.authenticate(username,password);            			 
-//    	System.out.println("Authentication: "+auth);
-//    	
-//    	DBCollection coll = db.getCollection("user");
-//    	System.out.println("Collection selected successfully");
-//    	
-			
+*/			
 		
 //		
 		MongoClient client = new MongoClient(HOST, PORT);
@@ -210,5 +209,5 @@ public class AdDao {
 						
 		}
 	}
-		
+			
 }
