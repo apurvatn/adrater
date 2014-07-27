@@ -9,13 +9,13 @@ public class AdVO  {
 	@Field("id")
 	private String id;
 	
-	@Field("adHeader_txt")
+	@Field("adHeader_t")
 	private String adHeader;
 	
 	@Field("url")
 	private String adLink;
 	
-	@Field("adDetails_txt")
+	@Field("adDetails_t")
 	private String adDetails;
 	
 	@Field("postDate_dt")
@@ -26,7 +26,7 @@ public class AdVO  {
 		
 	private LocationVO location;
 	
-	@Field("locationInfo_txt")
+	@Field("locationInfo_t")
 	private String locationInfo;
 	
 	public AdVO(){
