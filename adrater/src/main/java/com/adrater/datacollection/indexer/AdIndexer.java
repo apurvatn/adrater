@@ -100,22 +100,15 @@ public class AdIndexer {
 	 * @param date
 	 * @return
 	 */
-	private String toSolrDateFormat(String date) {
-		System.out.println(date);
+	private String toSolrDateFormat(Date date) {
 		// change the format of the date into the required format
-		SimpleDateFormat inFormat = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ssZ");
+	
 		SimpleDateFormat outFormat = new SimpleDateFormat(
 				"yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-		try {
-			Date postDate = inFormat.parse(date);
-			return outFormat.format(postDate);
+			
+			return outFormat.format(date);
 
-		} catch (ParseException e) {
-			System.err.println("Unable to parse the date" + e.getMessage());
-			return null;
-		}
 
 	}
 	

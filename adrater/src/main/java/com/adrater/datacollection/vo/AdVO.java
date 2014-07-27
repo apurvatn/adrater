@@ -1,5 +1,7 @@
 package com.adrater.datacollection.vo;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.solr.client.solrj.beans.Field;
@@ -19,7 +21,7 @@ public class AdVO  {
 	private String adDetails;
 	
 	@Field("postDate_dt")
-	private String postDate;
+	private Date postDate;
 	
 	@Field("category")
 	private String subCategory;
@@ -80,11 +82,11 @@ public class AdVO  {
 		this.adDetails = adDetails;
 	}
 
-	public String getPostDate() {
+	public Date getPostDate() {
 		return postDate;
 	}
 
-	public void setPostDate(String postDate) {
+	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
 

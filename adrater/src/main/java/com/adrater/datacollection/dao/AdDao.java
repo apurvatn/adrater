@@ -3,6 +3,7 @@ package com.adrater.datacollection.dao;
 import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -244,9 +245,12 @@ System.out.println("Collection selected successfully");
 			System.out.println(adVO);
 		}
 		*/
-	
+		//2014-06-10T18:11:28-0700
 		System.out.println("********************************************************");
 		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+		mapper.setDateFormat(sdf);
+		
 		File file = new File("output");
 		for(File json : file.listFiles()){
 			if(json.isDirectory()) continue;
