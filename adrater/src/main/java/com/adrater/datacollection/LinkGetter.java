@@ -56,6 +56,7 @@ public class LinkGetter {
 						getAdDetails(currList.get(i));
 						tryCnt = 1;
 					}catch(IOException e){
+						e.printStackTrace();
 						if(tryCnt >= MAX_RETRY)
 							continue;
 						tryCnt++;
@@ -66,6 +67,7 @@ public class LinkGetter {
 				
 				for (AdVO adVO : currList) {
 					getAdDetails(adVO);
+					System.out.println(adVO);
 					saveAsJSON(adVO);
 					Thread.currentThread().sleep(RESULT_FETCH_DELAY);
 				}
@@ -74,9 +76,11 @@ public class LinkGetter {
 
 				Thread.currentThread().sleep(RESULT_FETCH_DELAY);
 			} catch (InterruptedException e) {
+				e.printStackTrace();
 				//break from the loop
 				break;
 			} catch(IOException e){
+				e.printStackTrace();
 				continue;
 			}
 
@@ -187,9 +191,9 @@ public class LinkGetter {
 				id = id.substring(id.lastIndexOf('/') + 1, id.lastIndexOf('.'));
 				adVo.setId(id);
 				// get the category details
-				CategoryVO catVo = new CategoryVO(linkElems.get(2).text(),
-						linkElems.get(2).absUrl("href"));
-				adVo.setSubCategory(catVo);
+				/*CategoryVO catVo = new CategoryVO(linkElems.get(2).text(),
+						linkElems.get(2).absUrl("href"));*/
+				adVo.setSubCategory(linkElems.get(2).text());
 				// get the ad details
 				getAdDetails(adVo);
 
@@ -222,7 +226,7 @@ public class LinkGetter {
 				locationInfo = locationInfo.substring(0,
 						locationInfo.indexOf('('));
 
-			location.setInfo(locationInfo);
+			adVo.setLocationInfo(locationInfo);
 			// get the location details
 			Element locDetElem = doc.getElementById("map");
 			if (locDetElem != null) {
@@ -247,6 +251,13 @@ public class LinkGetter {
 
 		return adVo;
 
+	}
+	public static void main(String[] args) {
+		
+		
+		LinkGetter getter = new LinkGetter("http://sfbay.craigslist.org/bbb/");
+		getter.extractLinkDetails();
+		
 	}
 
 }
