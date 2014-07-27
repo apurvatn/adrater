@@ -1,5 +1,6 @@
 package com.adrater.datacollection.dao;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.LinkedList;
@@ -7,10 +8,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.adrater.datacollection.vo.AdVO;
+import com.adrater.datacollection.vo.LocationVO;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -91,7 +94,7 @@ System.out.println("Collection selected successfully");
 		
 		//set the fields  that are required
 		BasicDBObject fields = new BasicDBObject().append("_id",false).append("id", true).append("adHeader", true).append("adLink", true)
-				.append("adDetails", true).append("subCategory", true).append("location", true);
+				.append("adDetails", true).append("subCategory", true).append("location", true).append("postDate", true);
 		
 		
 		DBCursor cursor = adCollection.find(null,fields);
@@ -102,7 +105,9 @@ System.out.println("Collection selected successfully");
 		AdVO adVo=null;
 		
 		while(cursor.hasNext()){
-			 adVo = mapper.readValue(cursor.next().toString(), AdVO.class);
+			String data = cursor.next().toString();
+						
+			 adVo = mapper.readValue(data, AdVO.class);
 			 adList.add(adVo);
 						
 		}
@@ -126,7 +131,7 @@ System.out.println("Collection selected successfully");
 		
 		//set the fields  that are required
 		BasicDBObject fields = new BasicDBObject().append("_id",false).append("id", true).append("adHeader", true).append("adLink", true)
-				.append("subCategory", true);
+				.append("subCategory", true).append("postDate", true);
 		
 		
 		DBCursor cursor = adCollection.find(null,fields).skip(startIndex).limit(count);
@@ -159,7 +164,7 @@ System.out.println("Collection selected successfully");
 		DBCollection adCollection = db.getCollection(AD_COLLECTION_NAME);
 		//set the required fields that need to be fetched
 		BasicDBObject fields = new BasicDBObject().append("_id", false).append("id", true).append("adHeader", true).append("addLink", true)
-				.append("subCategory", true).append("location", true).append("postDate", true).append("adDetails", true);
+				.append("subCategory", true).append("location", true).append("postDate", true).append("adDetails", true).append("postDate", true);
 		
 		//query to find the required doc
 		BasicDBObject query = new BasicDBObject("id", "4492497102");
@@ -209,5 +214,49 @@ System.out.println("Collection selected successfully");
 						
 		}
 	}
+<<<<<<< HEAD
 			
+=======
+	
+	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
+		
+		/*AdDao adDo = new AdDao();
+		
+		List<AdVOOld> adList = adDo.getAllAds();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		for(AdVOOld adVOOld: adList ){
+			
+			AdVO adVO = new AdVO();
+			adVO.setAdDetails(adVOOld.getAdDetails());
+			adVO.setAdHeader(adVOOld.getAdHeader());
+			adVO.setSubCategory(adVOOld.getSubCategory().getCategory());
+			adVO.setAdLink(adVOOld.getSubCategory().getLink());
+			adVO.setId(adVOOld.getId());
+			adVO.setLocationInfo(adVOOld.getLocation().getInfo());
+			adVO.setPostDate(adVOOld.getPostDate());
+			
+			LocationVO vo = new LocationVO();
+			vo.setLattitude(adVOOld.getLocation().getLattitude());
+			vo.setLongitude(adVOOld.getLocation().getLongitude());
+			
+			adVO.setLocation(vo);
+			mapper.writeValue(new File("output/" + adVO.getId() + ".json"),
+					adVO);
+			System.out.println(adVO);
+		}
+		*/
+	
+		System.out.println("********************************************************");
+		ObjectMapper mapper = new ObjectMapper();
+		File file = new File("output");
+		for(File json : file.listFiles()){
+			if(json.isDirectory()) continue;
+			AdVO adVo = mapper.readValue(json, AdVO.class);
+			System.out.println(mapper.writeValueAsString(adVo));
+		}
+	}
+		
+>>>>>>> 0994ee513de8a8b0d2ffbc41e2f318ce8804da7c
 }

@@ -13,14 +13,9 @@ public class LocationVO {
 	@Field("longitude_p")
 	private String longitude;
 	
-	@Field("info_t")
-	private String info;
-	
-		
 	public LocationVO(){
 		this.lattitude = null;
 		this.longitude = null;
-		this.info = null;
 	}
 	
 	public LocationVO(String lattitude, String longitude){
@@ -44,17 +39,10 @@ public class LocationVO {
 		this.longitude = longitude;
 	}
 
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
-	}
 	@Override
 	public String toString(){
 		
-		return "{info:"+this.info+" , lattitude:"+ this.lattitude +" , longitude:" + this.longitude+" }"; 
+		return "{lattitude:"+ this.lattitude +" , longitude:" + this.longitude+" }"; 
 		
 	}
 	

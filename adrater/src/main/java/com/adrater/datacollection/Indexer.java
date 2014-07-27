@@ -90,10 +90,11 @@ public class Indexer {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		for(File adInfoFile : jsonFiles){
-			
+			if(adInfoFile.isDirectory()) continue;
 				try {
 					AdVO adVo = mapper.readValue(adInfoFile, AdVO.class);
-					
+					adVo.setPostDate(adVo.getPostDate()+"Z");
+					System.out.println(adVo);
 					server.addBean(adVo);
 					
 				} catch (IOException e) {
@@ -153,15 +154,16 @@ public class Indexer {
 	public static void main(String[] args) throws SolrServerException {
 		
 		Indexer indexer = new Indexer();
-	//	indexer.addDocuments();
-	//	indexer.deleteAllDocs();
+	
+		indexer.deleteAllDocs();
+		indexer.addDocuments();
 	//	indexer.getAllDocs();
-		try {
+		/*try {
 			indexer.extractFromMongo();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }

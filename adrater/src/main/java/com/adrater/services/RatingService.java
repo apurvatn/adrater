@@ -10,7 +10,7 @@ public class RatingService {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public void testRating(String rating){
+	public void rateAd(String rating){
 		
 		
 	}

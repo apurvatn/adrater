@@ -34,6 +34,7 @@ public class AdService {
 	}*/
 
 	@GET
+
 	@Produces(MediaType.TEXT_HTML)
 	public Viewable getAds(@Context HttpServletRequest httpRequest){
 		if(httpRequest.getParameter("id") != null){
@@ -54,7 +55,22 @@ public class AdService {
 		httpRequest.setAttribute("part", part);
 			/////////////////////////////
 		return new Viewable("/ads.jsp");
+		
+		
 	}
-	
+
+	/*@Path("ad")
+	@Produces(MediaType.APPLICATION_JSON)
+	public AdVO getAd (@QueryParam("id") String id){
+		System.out.println(id);
+		if(id == null || id == "")
+			return null;
+		
+		AdManager adManager = new AdManager();
+		return adManager.getAdDetails(id);
+ 
+
+	}
+	*/
 
 }
