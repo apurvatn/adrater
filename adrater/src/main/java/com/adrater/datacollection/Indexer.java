@@ -90,11 +90,11 @@ public class Indexer {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		for(File adInfoFile : jsonFiles){
-			
+			if(adInfoFile.isDirectory()) continue;
 				try {
 					AdVO adVo = mapper.readValue(adInfoFile, AdVO.class);
 					adVo.setPostDate(adVo.getPostDate()+"Z");
-					
+					System.out.println(adVo);
 					server.addBean(adVo);
 					
 				} catch (IOException e) {
