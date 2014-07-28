@@ -5,6 +5,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.adrater.manager.RatingManager;
+
 @Path("/rating")
 public class RatingService {
 	
@@ -12,7 +14,8 @@ public class RatingService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void rateAd(String rating){
 		
-		
+		RatingManager ratingManager = new RatingManager();
+		ratingManager.parseUserRating(rating);
 	}
 
 }
